@@ -1,0 +1,1 @@
+#Rive animation component
