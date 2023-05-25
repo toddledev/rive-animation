@@ -12,26 +12,27 @@ class RiveAnimation extends HTMLElement {
     canvas.setAttribute('width', this.getAttribute('width') ?? '500');
     canvas.setAttribute('height', this.getAttribute('height') ?? '500');
     this.shadowRoot.appendChild(canvas);
+    this.load();
     
   }
   static get observedAttributes() {
-      return ['src','statemachines', 'animations'];
-    }
-  
-    attributeChangedCallback(name, oldValue, newValue) {
-      this.load();
-    }
+    return ['src','statemachines', 'animations', "autoplay"];
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    this.load();
+  }
   
   load(src) {
     this.errorMessage?.remove();
     if (this.riveInstance) {
       this.riveInstance.cleanup();
     }
-    if (!this.getAttribute("src")) {
-      if (!this.getAttribute('src')) {
-        this.errorMessage = document.createElement('p');
-        p.innerText = `Missing "src" attribute`;
-        this.shadowRoot.appendChild(this.errorMessage);
+
+    if (!this.getAttribute('src')) {
+      this.errorMessage = document.createElement('p');
+      p.innerText = `Missing "src" attribute`;
+      this.shadowRoot.appendChild(this.errorMessage);
     }
 
     
