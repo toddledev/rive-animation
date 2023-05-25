@@ -15,12 +15,33 @@ class RiveAnimation extends HTMLElement {
     this.load();
     
   }
+
   static get observedAttributes() {
-    return ['src','statemachines', 'animations', "autoplay"];
+    return ['src','statemachines', 'animations', "play"];
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    this.load();
+    switch (name) {
+      case "play": {
+        Boolean(newValue) ? this.riveInstance.play() : this.riveInstance.stop()
+        break;
+      }
+      case "statemachine": {
+        if (newValue !== this.stateMachines) {
+          this.load()
+        }
+      }
+      case "animations": {
+        if (newValue !== this.animations) {
+          this.load()
+        }
+      }
+      case "src": {
+        if (newValue !== this.src) {
+          this.load()
+        }
+      }
+    }
   }
   
   load() {
@@ -28,7 +49,6 @@ class RiveAnimation extends HTMLElement {
     if (this.riveInstance) {
       this.riveInstance.cleanup();
       this.riveInstance = null
-
     }
 
     if (!this.getAttribute('src')) {
@@ -37,15 +57,19 @@ class RiveAnimation extends HTMLElement {
       this.shadowRoot.appendChild(this.errorMessage);
     }
 
+    this.src = this.getAttribute("src")
+    this.stateMachines = this.getAttribute("statemachine")
+    this.animations = this.getAttribute("animations")
+
 
     this.riveInstance = new rive.Rive({
-      src: this.getAttribute('src'),
+      src: this.src,
       // Or the path to a public Rive asset
       // src: '/public/example.riv',
       canvas: this.canvas,
-      autoplay: Boolean(this.getAttribute("autoplay")),
-      stateMachines: this.getAttribute("statemachine")?.split(",").map(s => s.trim()),
-      animations: this.getAttribute("animations")?.split(",").map(s => s.trim()),
+      autoplay: Boolean(this.getAttribute("play")),
+      stateMachines: this.stateMachines?.split(",").map(s => s.trim()),
+      animations: this.animations?.split(",").map(s => s.trim()),
     });
   }
 }
