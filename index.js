@@ -23,7 +23,7 @@ class RiveAnimation extends HTMLElement {
   attributeChangedCallback(name, oldValue, newValue) {
     switch (name) {
       case "play": {
-        (newValue !== null && newValue !== undefined) ? this.riveInstance?.play() : this.riveInstance?.stop()
+        (newValue !== null && newValue !== undefined) ? this.riveInstance?.play() : this.riveInstance?.pause()
         break;
       }
       case "statemachine": {
@@ -67,7 +67,11 @@ class RiveAnimation extends HTMLElement {
       autoplay: this.hasAttribute("play"),
       stateMachines: this.stateMachines?.split(",").map(s => s.trim()),
       animations: this.animations?.split(",").map(s => s.trim()),
+      onLoad: () => {
+        this.riveInstance.resizeDrawingSurfaceToCanvas();
+      },
     });
   }
 }
 customElements.define('rive-animation', RiveAnimation);
+
