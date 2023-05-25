@@ -17,7 +17,7 @@ class RiveAnimation extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['src','statemachines', 'animations', "play"];
+    return ['source','statemachines', 'animations', "play"];
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
@@ -36,8 +36,8 @@ class RiveAnimation extends HTMLElement {
           this.load()
         }
       }
-      case "src": {
-        if (newValue !== this.src) {
+      case "source": {
+        if (newValue !== this.source) {
           this.load()
         }
       }
@@ -55,12 +55,12 @@ class RiveAnimation extends HTMLElement {
      return
     }
 
-    this.src = this.getAttribute("src")
+    this.source = this.getAttribute("source")
     this.stateMachines = this.getAttribute("statemachine")
     this.animations = this.getAttribute("animations")
 
     this.riveInstance = new rive.Rive({
-      src: this.src,
+      src: this.source,
       // Or the path to a public Rive asset
       // src: '/public/example.riv',
       canvas: this.canvas,
