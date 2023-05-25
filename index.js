@@ -27,6 +27,8 @@ class RiveAnimation extends HTMLElement {
     this.errorMessage?.remove();
     if (this.riveInstance) {
       this.riveInstance.cleanup();
+      this.riveInstance = null
+
     }
 
     if (!this.getAttribute('src')) {
@@ -35,7 +37,6 @@ class RiveAnimation extends HTMLElement {
       this.shadowRoot.appendChild(this.errorMessage);
     }
 
-    
 
     this.riveInstance = new rive.Rive({
       src: this.getAttribute('src'),
