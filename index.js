@@ -59,13 +59,12 @@ class RiveAnimation extends HTMLElement {
     this.stateMachines = this.getAttribute("statemachine")
     this.animations = this.getAttribute("animations")
 
-
     this.riveInstance = new rive.Rive({
       src: this.src,
       // Or the path to a public Rive asset
       // src: '/public/example.riv',
       canvas: this.canvas,
-      autoplay: this.getAttribute("play") ?? true ? true : false,
+      autoplay: this.hasAttribute("play"),
       stateMachines: this.stateMachines?.split(",").map(s => s.trim()),
       animations: this.animations?.split(",").map(s => s.trim()),
     });
