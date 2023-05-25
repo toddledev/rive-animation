@@ -23,7 +23,7 @@ class RiveAnimation extends HTMLElement {
     this.load();
   }
   
-  load(src) {
+  load() {
     this.errorMessage?.remove();
     if (this.riveInstance) {
       this.riveInstance.cleanup();
@@ -38,7 +38,7 @@ class RiveAnimation extends HTMLElement {
     
 
     this.riveInstance = new rive.Rive({
-      src: src,
+      src: this.getAttribute('src'),
       // Or the path to a public Rive asset
       // src: '/public/example.riv',
       canvas: this.canvas,
