@@ -51,7 +51,7 @@ class RiveAnimation extends HTMLElement {
       this.riveInstance = null
     }
 
-    if (!this.getAttribute('src')) {
+    if (!this.getAttribute('source')) {
      return
     }
 
