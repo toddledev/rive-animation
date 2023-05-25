@@ -53,7 +53,7 @@ class RiveAnimation extends HTMLElement {
 
     if (!this.getAttribute('src')) {
       this.errorMessage = document.createElement('p');
-      p.innerText = `Missing "src" attribute`;
+      this.errorMessage.innerText = `Missing "src" attribute`;
       this.shadowRoot.appendChild(this.errorMessage);
     }
 
