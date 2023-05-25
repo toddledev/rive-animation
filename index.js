@@ -23,7 +23,7 @@ class RiveAnimation extends HTMLElement {
   attributeChangedCallback(name, oldValue, newValue) {
     switch (name) {
       case "play": {
-        (newValue !== null && newValue !== undefined) ? this.riveInstance.play() : this.riveInstance.stop()
+        (newValue !== null && newValue !== undefined) ? this.riveInstance?.play() : this.riveInstance?.stop()
         break;
       }
       case "statemachine": {
