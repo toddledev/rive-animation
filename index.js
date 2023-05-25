@@ -9,8 +9,9 @@ class RiveAnimation extends HTMLElement {
     this.attachShadow({ mode: 'open' });
    
     this.canvas = document.createElement('canvas');
-    this.canvas.setAttribute('width', this.getAttribute('width') ?? '500');
-    this.canvas.setAttribute('height', this.getAttribute('height') ?? '500');
+    this.canvas.style.width = "100%"
+    this.canvas.style.height = "100%"
+
     this.shadowRoot.appendChild(this.canvas);
     this.load();
     
